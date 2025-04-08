@@ -28,16 +28,18 @@ df_tratado['Marital_Status_cod'] = label_encoder.fit_transform(df['Marital_Statu
 df_tratado['Purchase_Amount'] = df_tratado['Purchase_Amount'].str.replace('$', '', regex=False)
 df_tratado['Purchase_Amount'] = df_tratado['Purchase_Amount'].astype(float)
 
+print('Correlação: \n',df_tratado[['Purchase_Amount', 'Age','Gender_cod', 'Marital_Status_cod','Education_Level_Ord', 'Frequency_of_Purchase', 'Time_Spent_on_Product_Research(hours)', 'Customer_Satisfaction', 'Return_Rate']].corr())
+
+print(df_tratado.dtypes)
+print(df_tratado['Purchase_Amount'].sum())
+print(df_tratado['Purchase_Amount'].max())
+print(df_tratado['Purchase_Amount'].min())
+print(df_tratado['Purchase_Amount'].mean())
+
 
 bins = [17, 23, 29, 35, 41, 47, 60]
 labels = ['18-23', '24-29', '30-35', '36-41', '42-47', '48-60']
 df_tratado['Age_range'] = pd.cut(df['Age'], bins=bins, labels=labels)
 
-print(df_tratado.dtypes)
-print(df_tratado['Purchase_Amount'].sum())
-print(df_tratado.head())
-
-
-print('Correlação: \n',df_tratado[['Purchase_Amount', 'Age','Gender_cod', 'Marital_Status_cod','Education_Level_Ord', 'Frequency_of_Purchase', 'Time_Spent_on_Product_Research(hours)', 'Customer_Satisfaction', 'Return_Rate']].corr())
 
 df_tratado.to_csv('Df_tratado.csv', index=False)
